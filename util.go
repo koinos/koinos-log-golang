@@ -18,8 +18,7 @@ const (
 	compressBackups = true
 )
 
-// StringToLogLevel takes a string and returns a zap log level
-func StringToLogLevel(level string) (zapcore.Level, error) {
+func stringToLogLevel(level string) (zapcore.Level, error) {
 	switch level {
 	case "debug":
 		return zapcore.DebugLevel, nil
@@ -34,8 +33,18 @@ func StringToLogLevel(level string) (zapcore.Level, error) {
 	}
 }
 
+func InitLogger(level string, jsonFileOutput bool, logFilename string, appID string) error {
+	l, err := stringToLogLevel(level)
+	if err != nil {
+		return err
+	}
+
+	initLogger(l, jsonFileOutput, logFilename, appID)
+	return nil
+}
+
 // InitLogger initializes the logger with the given parameters
-func InitLogger(level zapcore.Level, jsonFileOutput bool, logFilename string, appID string) {
+func initLogger(level zapcore.Level, jsonFileOutput bool, logFilename string, appID string) {
 	// Construct production encoder config, set time format
 	e := zap.NewDevelopmentEncoderConfig()
 	e.EncodeTime = KoinosTimeEncoder
