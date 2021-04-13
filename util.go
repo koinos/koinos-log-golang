@@ -89,5 +89,4 @@ func initLogger(level zapcore.Level, jsonFileOutput bool, logFilename string, ap
 
 	// Set global logger
 	zap.ReplaceGlobals(logger)
-	e.Call
 }
