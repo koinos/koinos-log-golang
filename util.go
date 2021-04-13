@@ -81,12 +81,13 @@ func initLogger(level zapcore.Level, jsonFileOutput bool, logFilename string, ap
 		)
 	})
 
-	// Construct logger
-	logger, err := zap.NewProduction(coreFunc)
+	// Construct logger. Add caller skip for correct line numbers (since this library wraps zap calls)
+	logger, err := zap.NewProduction(coreFunc, zap.AddCallerSkip(1))
 	if err != nil {
 		panic(fmt.Sprintf("Error constructing logger: %v", err))
 	}
 
 	// Set global logger
 	zap.ReplaceGlobals(logger)
+	e.Call
 }
