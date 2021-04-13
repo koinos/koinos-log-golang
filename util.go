@@ -33,6 +33,7 @@ func stringToLogLevel(level string) (zapcore.Level, error) {
 	}
 }
 
+// InitLogger initializes the logger with the given parameters
 func InitLogger(level string, jsonFileOutput bool, logFilename string, appID string) error {
 	l, err := stringToLogLevel(level)
 	if err != nil {
@@ -43,7 +44,6 @@ func InitLogger(level string, jsonFileOutput bool, logFilename string, appID str
 	return nil
 }
 
-// InitLogger initializes the logger with the given parameters
 func initLogger(level zapcore.Level, jsonFileOutput bool, logFilename string, appID string) {
 	// Construct production encoder config, set time format
 	e := zap.NewDevelopmentEncoderConfig()
