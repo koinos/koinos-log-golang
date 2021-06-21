@@ -47,6 +47,7 @@ func Error(msg string) {
 	zap.L().Error(msg)
 }
 
+// FormatError is used by Errorm, Warnm, etc. to create consistent formatting
 func FormatError(msg string, vars ...interface{}) string {
 	if (len(vars) & 1) != 0 {
 		Errorm("Message did not have even number of arguments", "msg", msg)
@@ -83,6 +84,7 @@ func Errorm(msg string, args ...interface{}) {
 	Error(FormatError(msg, args))
 }
 
+// NewErrorm creates an error with consistent logging
 func NewErrorm(msg string, args ...interface{}) error {
 	return errors.New(FormatError(msg, args))
 }
