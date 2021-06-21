@@ -66,25 +66,25 @@ func FormatError(msg string, vars ...interface{}) string {
 
 // Debugm logs to the debug level with consistent logging
 func Debugm(msg string, args ...interface{}) {
-	Debug(FormatError(msg, args))
+	Debug(FormatError(msg, args...))
 }
 
 // Infom logs to the info level with consistent logging
 func Infom(msg string, args ...interface{}) {
-	Info(FormatError(msg, args))
+	Info(FormatError(msg, args...))
 }
 
 // Warnm logs to the warn level with consistent logging
 func Warnm(msg string, args ...interface{}) {
-	Warn(FormatError(msg, args))
+	Warn(FormatError(msg, args...))
 }
 
 // Errorm logs to the error level with consistent logging
 func Errorm(msg string, args ...interface{}) {
-	Error(FormatError(msg, args))
+	Error(FormatError(msg, args...))
 }
 
 // NewErrorm creates an error with consistent logging
 func NewErrorm(msg string, args ...interface{}) error {
-	return errors.New(FormatError(msg, args))
+	return errors.New(FormatError(msg, args...))
 }
