@@ -180,7 +180,11 @@ func (c color) AddColor(s string) string {
 
 func init() {
 	for level, color := range _levelToColor {
-		_koinosColorString[level] = color.AddColor(level.String())
+		if level == zapcore.WarnLevel {
+			_koinosColorString[level] = color.AddColor("warning")
+		} else {
+			_koinosColorString[level] = color.AddColor(level.String())
+		}
 	}
 }
 
