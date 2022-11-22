@@ -147,14 +147,10 @@ func (ke *KoinosEncoder) EncodeEntry(ent zapcore.Entry, fields []zapcore.Field) 
 }
 
 const (
-	black color = iota + 30
-	red
+	red color = iota + 31
 	green
 	yellow
 	blue
-	magenta
-	cyan
-	white
 )
 
 type color uint8
