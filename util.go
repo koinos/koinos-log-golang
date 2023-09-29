@@ -63,8 +63,8 @@ func initLogger(appName string, appID string, level zapcore.Level, dir string, c
 		// Construct lumberjack log roller
 		lj := &lumberjack.Logger{
 			Filename:   path.Join(dir, appName+".log"),
-			MaxSize:    1,   // 1 Mb
-			MaxBackups: 100, // 100 files
+			MaxSize:    1,  // 1 Mb
+			MaxBackups: 10, // 100 files
 		}
 
 		// Construct core
