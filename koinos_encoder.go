@@ -184,6 +184,15 @@ func init() {
 	}
 }
 
+// KoinosLevelEncoder implements the Koinos log level encoding standard
+func KoinosLevelEncoder(l zapcore.Level, enc zapcore.PrimitiveArrayEncoder) {
+	if l == zapcore.WarnLevel {
+		enc.AppendString("warning")
+	} else {
+		enc.AppendString(l.String())
+	}
+}
+
 // KoinosColorLevelEncoder implements the Koinos log level color encoding standard
 func KoinosColorLevelEncoder(l zapcore.Level, enc zapcore.PrimitiveArrayEncoder) {
 	s, ok := _koinosColorString[l]

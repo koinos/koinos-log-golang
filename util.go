@@ -46,7 +46,7 @@ func initLogger(appName string, instanceID string, level zapcore.Level, dir stri
 	if color {
 		e.EncodeLevel = KoinosColorLevelEncoder
 	} else {
-		e.EncodeLevel = zapcore.LowercaseLevelEncoder
+		e.EncodeLevel = KoinosLevelEncoder
 	}
 
 	// Construct Console encoder for console output
@@ -59,7 +59,7 @@ func initLogger(appName string, instanceID string, level zapcore.Level, dir stri
 		var fileEncoder zapcore.Encoder
 		fe := zap.NewDevelopmentEncoderConfig()
 		fe.EncodeTime = KoinosTimeEncoder
-		fe.EncodeLevel = zapcore.LowercaseLevelEncoder
+		fe.EncodeLevel = KoinosLevelEncoder
 		fileEncoder = NewKoinosEncoder(fe, appID)
 
 		// Construct lumberjack log roller
