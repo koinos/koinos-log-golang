@@ -27,17 +27,19 @@ func stringToLogLevel(level string) (zapcore.Level, error) {
 }
 
 // InitLogger initializes the logger with the given parameters
-func InitLogger(appName string, appID string, level string, dir string, color bool) error {
+func InitLogger(appName string, instanceID string, level string, dir string, color bool) error {
 	logLevel, err := stringToLogLevel(level)
 	if err != nil {
 		return err
 	}
 
-	initLogger(appName, appID, logLevel, dir, color)
+	initLogger(appName, instanceID, logLevel, dir, color)
 	return nil
 }
 
-func initLogger(appName string, appID string, level zapcore.Level, dir string, color bool) {
+func initLogger(appName string, instanceID string, level zapcore.Level, dir string, color bool) {
+	appID := fmt.Sprintf("%s.%s", appName, instanceID)
+
 	// Construct production encoder config, set time format
 	e := zap.NewDevelopmentEncoderConfig()
 	e.EncodeTime = KoinosTimeEncoder
