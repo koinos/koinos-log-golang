@@ -17,7 +17,7 @@ func stringToLogLevel(level string) (zapcore.Level, error) {
 		return zapcore.DebugLevel, nil
 	case "info":
 		return zapcore.InfoLevel, nil
-	case "warn":
+	case "warning":
 		return zapcore.WarnLevel, nil
 	case "error":
 		return zapcore.ErrorLevel, nil
@@ -65,8 +65,8 @@ func initLogger(appName string, instanceID string, level zapcore.Level, dir stri
 		// Construct lumberjack log roller
 		lj := &lumberjack.Logger{
 			Filename:   path.Join(dir, appName+".log"),
-			MaxSize:    1,  // 1 Mb
-			MaxBackups: 10, // 100 files
+			MaxSize:    1,   // 1 Mb
+			MaxBackups: 100, // 100 files
 		}
 
 		// Construct core
