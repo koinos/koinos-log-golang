@@ -44,6 +44,8 @@ func initLogger(appName string, instanceID string, level zapcore.Level, dir stri
 	e := zap.NewDevelopmentEncoderConfig()
 	if datetime {
 		e.EncodeTime = KoinosTimeEncoder
+	} else {
+		e.EncodeTime = KoinosNoTimeEncoder
 	}
 
 	if color {
