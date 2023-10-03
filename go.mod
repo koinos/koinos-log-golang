@@ -1,4 +1,4 @@
-module github.com/koinos/koinos-log-golang
+module github.com/koinos/koinos-log-golang/v2
 
 go 1.15
 
