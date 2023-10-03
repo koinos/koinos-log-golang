@@ -105,9 +105,10 @@ func (ke *KoinosEncoder) EncodeEntry(ent zapcore.Entry, fields []zapcore.Field) 
 	arr := getSliceEncoder()
 	if ke.TimeKey != "" && ke.EncodeTime != nil {
 		ke.EncodeTime(ent.Time, arr)
+		arr.AppendString(" ")
 	}
 
-	arr.AppendString(" (")
+	arr.AppendString("(")
 	arr.AppendString(ke.AppID)
 	arr.AppendString(")")
 
@@ -181,6 +182,15 @@ func init() {
 		} else {
 			_koinosColorString[level] = color.AddColor(level.String())
 		}
+	}
+}
+
+// KoinosLevelEncoder implements the Koinos log level encoding standard
+func KoinosLevelEncoder(l zapcore.Level, enc zapcore.PrimitiveArrayEncoder) {
+	if l == zapcore.WarnLevel {
+		enc.AppendString("warning")
+	} else {
+		enc.AppendString(l.String())
 	}
 }
 
