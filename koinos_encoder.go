@@ -105,9 +105,10 @@ func (ke *KoinosEncoder) EncodeEntry(ent zapcore.Entry, fields []zapcore.Field) 
 	arr := getSliceEncoder()
 	if ke.TimeKey != "" && ke.EncodeTime != nil {
 		ke.EncodeTime(ent.Time, arr)
+		arr.AppendString(" ")
 	}
 
-	arr.AppendString(" (")
+	arr.AppendString("(")
 	arr.AppendString(ke.AppID)
 	arr.AppendString(")")
 
@@ -206,6 +207,3 @@ func KoinosColorLevelEncoder(l zapcore.Level, enc zapcore.PrimitiveArrayEncoder)
 func KoinosTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 	enc.AppendString(t.Format("2006-01-02 15:04:05.000000"))
 }
-
-// KoinosNoTimeEncoder does not encode timestamps in the log standard
-func KoinosNoTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {}
